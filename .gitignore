@@ -58,6 +58,7 @@ GitHub.sublime-settings
 
 
 ### WordPress ###
+.idea
 *.log
 wp-config.php
 wp-content/advanced-cache.php
