@@ -475,15 +475,15 @@ if(is_single())
 				    $pp_retina_logo_height = 0;
 				    			
 				    if(empty($pp_logo) && empty($pp_retina_logo))
-				    {	
+				    {
 				    	$pp_retina_logo = get_template_directory_uri().'/images/logo@2x.png';
 				    	$pp_retina_logo_width = 69;
 				    	$pp_retina_logo_height = 33;
 				    }
 
 				    if(!empty($pp_retina_logo))
-				    {	
-				    	if(empty($pp_retina_logo_width) && empty($pp_retina_logo_height))
+				    {
+				    	/*if(empty($pp_retina_logo_width) && empty($pp_retina_logo_height))
 				    	{
 				    		//Get image width and height
 				    		$pp_retina_logo_id = pp_get_image_id($pp_retina_logo);
@@ -492,10 +492,10 @@ if(is_single())
 				    		$pp_retina_logo = $image_logo[0];
 				    		$pp_retina_logo_width = $image_logo[1]/2;
 				    		$pp_retina_logo_height = $image_logo[2]/2;
-				    	}
+				    	}*/
 				?>		
 				    <a id="custom_logo" class="logo_wrapper <?php if($use_transparent_logo) { ?>hidden<?php } else { ?>default<?php } ?>" href="<?php echo home_url(); ?>">
-				    	<img src="<?php echo $pp_retina_logo; ?>" alt="" width="<?php echo $pp_retina_logo_width; ?>" height="<?php echo $pp_retina_logo_height; ?>"/>
+				    	<img src="<?php echo $pp_retina_logo; ?>" alt="" width="69" height="33"/>
 				    </a>
 				<?php
 				    }
@@ -525,7 +525,7 @@ if(is_single())
 
 				    if(!empty($pp_retina_logo_transparent))
 				    {
-				    	if(empty($pp_retina_logo_transparent_width) && empty($pp_retina_logo_transparent_width))
+				    	/*if(empty($pp_retina_logo_transparent_width) && empty($pp_retina_logo_transparent_width))
 				    	{
 				    		//Get image width and height
 				    		$pp_retina_logo_transparent_id = pp_get_image_id($pp_retina_logo_transparent);
@@ -534,10 +534,10 @@ if(is_single())
 				    		$pp_retina_logo_transparent = $image_logo[0];
 				    		$pp_retina_logo_transparent_width = $image_logo[1]/2;
 				    		$pp_retina_logo_transparent_height = $image_logo[2]/2;
-				    	}
+				    	}*/
 				?>		
 				    <a id="custom_logo_transparent" class="logo_wrapper <?php if(!$use_transparent_logo) { ?>hidden<?php } else { ?>default<?php } ?>" href="<?php echo home_url(); ?>">
-				    	<img src="<?php echo $pp_retina_logo_transparent; ?>" alt="" width="<?php echo $pp_retina_logo_transparent_width; ?>" height="<?php echo $pp_retina_logo_transparent_height; ?>"/>
+				    	<img src="<?php echo $pp_retina_logo_transparent; ?>" alt="" width="69" height="33"/>
 				    </a>
 				<?php
 				    }
