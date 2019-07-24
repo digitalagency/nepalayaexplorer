@@ -425,7 +425,7 @@ blockquote h3
 
 .logo_wrapper
 {
-	margin: 25px 0 15px 0;
+	/*margin: 25px 0 15px 0;*/
 	float: left;
 }
 
@@ -536,7 +536,7 @@ blockquote h3
 #menu_wrapper
 {
 	margin:auto;
-	width: 960px;
+	width: 1170px;
 	z-index: 99999;
 }
 

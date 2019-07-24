@@ -156,7 +156,7 @@ class Jetpack_SEO_Titles {
 			return 'front_page';
 		}
 
-		if ( is_category() || is_tag() ) {
+		if ( is_category() || is_tag() || is_tax() ) {
 			return 'groups';
 		}
 
@@ -244,6 +244,10 @@ class Jetpack_SEO_Titles {
 		foreach ( $title_formats as $format_type => $format_array ) {
 			if ( ! in_array( $format_type, array_keys( $allowed_tokens ) ) ) {
 				return false;
+			}
+
+			if ( '' === $format_array ) {
+				continue;
 			}
 
 			if ( ! is_array( $format_array ) ) {

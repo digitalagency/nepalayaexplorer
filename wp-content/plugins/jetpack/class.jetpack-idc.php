@@ -1,5 +1,8 @@
 <?php
 
+use Automattic\Jetpack\Assets;
+use Automattic\Jetpack\Assets\Logo as Jetpack_Logo;
+
 /**
  * This class will handle everything involved with fixing an Identity Crisis.
  *
@@ -162,6 +165,14 @@ class Jetpack_IDC {
 	 * Clears all IDC specific options. This method is used on disconnect and reconnect.
 	 */
 	static function clear_all_idc_options() {
+		// If the site is currently in IDC, let's also clear the VaultPress connection options.
+		// We have to check if the site is in IDC, otherwise we'd be clearing the VaultPress
+		// connection any time the Jetpack connection is cycled.
+		if ( Jetpack::validate_sync_error_idc_option() ) {
+			delete_option( 'vaultpress' );
+			delete_option( 'vaultpress_auto_register' );
+		}
+
 		Jetpack_Options::delete_option(
 			array(
 				'sync_error_idc',
@@ -246,7 +257,7 @@ class Jetpack_IDC {
 
 		wp_enqueue_script(
 			'jetpack-idc-js',
-			plugins_url( '_inc/idc-notice.js', JETPACK__PLUGIN_FILE ),
+			Assets::get_file_url_for_environment( '_inc/build/idc-notice.min.js', '_inc/idc-notice.js' ),
 			array( 'jquery' ),
 			JETPACK__VERSION,
 			true
@@ -270,7 +281,7 @@ class Jetpack_IDC {
 		if ( ! wp_style_is( 'jetpack-dops-style' ) ) {
 			wp_register_style(
 				'jetpack-dops-style',
-				plugins_url( '_inc/build/admin.dops-style.css', JETPACK__PLUGIN_FILE ),
+				plugins_url( '_inc/build/admin.css', JETPACK__PLUGIN_FILE ),
 				array(),
 				JETPACK__VERSION
 			);
@@ -304,7 +315,7 @@ class Jetpack_IDC {
 	function render_notice_header() { ?>
 		<div class="jp-idc-notice__header">
 			<div class="jp-idc-notice__header__emblem">
-				<?php echo Jetpack::get_jp_emblem(); ?>
+				<?php $jetpack_logo = new Jetpack_Logo(); echo $jetpack_logo->get_jp_emblem(); ?>
 			</div>
 			<p class="jp-idc-notice__header__text">
 				<?php esc_html_e( 'Jetpack Safe Mode', 'jetpack' ); ?>
@@ -440,7 +451,7 @@ class Jetpack_IDC {
 		$html = wp_kses(
 			sprintf(
 				__(
-					'Please confirm Safe Mode or fix the Jetpack connection. Select one of the options below or <a href="%1$s">learn 
+					'Please confirm Safe Mode or fix the Jetpack connection. Select one of the options below or <a href="%1$s">learn
 					more about Safe Mode</a>.',
 					'jetpack'
 				),
@@ -463,7 +474,7 @@ class Jetpack_IDC {
 		$html = wp_kses(
 			sprintf(
 				__(
-					'Is this website a temporary duplicate of <a href="%1$s">%2$s</a> for the purposes 
+					'Is this website a temporary duplicate of <a href="%1$s">%2$s</a> for the purposes
 					of testing, staging or development? If so, we recommend keeping it in Safe Mode.',
 					'jetpack'
 				),
@@ -500,7 +511,7 @@ class Jetpack_IDC {
 		$html = wp_kses(
 			sprintf(
 				__(
-					'If this is a separate and new website, or the new home of <a href="%1$s">%2$s</a>, 
+					'If this is a separate and new website, or the new home of <a href="%1$s">%2$s</a>,
 					we recommend turning Safe Mode off, and re-establishing your connection to WordPress.com.',
 					'jetpack'
 				),
@@ -596,7 +607,7 @@ class Jetpack_IDC {
 		$html = wp_kses(
 			sprintf(
 				__(
-					'No. <a href="%1$s">%2$s</a> is a new and different website that\'s separate from 
+					'No. <a href="%1$s">%2$s</a> is a new and different website that\'s separate from
 					<a href="%3$s">%4$s</a>. It requires  a new connection to WordPress.com for new stats and subscribers.',
 					'jetpack'
 				),

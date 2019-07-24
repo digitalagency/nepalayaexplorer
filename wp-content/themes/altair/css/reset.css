@@ -25,3 +25,16 @@ a img
 {
 	border:none;
 }
+.rafting{
+	background-image: url("../images/lifejacket.png");
+	background-repeat: no-repeat;
+	padding-left: 30px;  /* width of the image plus a little extra padding */
+	display: block;
+}
+.trekking{
+	background-image: url("../images/trekking.png");
+	background-repeat: no-repeat;
+	padding-left: 30px;  /* width of the image plus a little extra padding */
+	display: block;
+}
+.relatedpack li ul{margin-left: 20px !important;}
